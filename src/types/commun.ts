@@ -1,8 +1,8 @@
 import { TITLES } from "@/const/title";
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 
 export type Titles = keyof typeof TITLES;
 
 export type WithChildren = {
-  children: ReactElement;
+  children: ReactNode;
 };

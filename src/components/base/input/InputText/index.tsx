@@ -49,7 +49,7 @@ export default function InputText({
         isInvalid={invalid}
         type={type}
         background={"churras.white"}
-        borderRadius={0}
+        borderRadius={"2px"}
         border={"none"}
         color={"churras.black_08"}
         fontSize={"18px"}

@@ -9,6 +9,7 @@ import {
   useImperativeHandle,
 } from "react";
 import { LoginFormRefType, LoginFormValues, LoginProps } from "./types";
+import PrimaryButton from "@/components/base/button/PrimaryButton";
 
 const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
   { onSubmit },
@@ -37,7 +38,7 @@ const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
       onSubmit={handleSubmit(onSubmit)}
       flexDirection={"column"}
       rowGap={4}
-      width={"300px"}
+      width={"282px"}
     >
       <InputText
         type="email"
@@ -53,9 +54,9 @@ const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
         placeholder="Senha"
         control={control}
       />
-      <Button mt={8} colorScheme="brand" isLoading={isSubmitting} type="submit">
-        Submit
-      </Button>
+      <PrimaryButton isLoading={isSubmitting} type="submit" height={"50px"}>
+        Entrar
+      </PrimaryButton>
     </Flex>
   );
 };
