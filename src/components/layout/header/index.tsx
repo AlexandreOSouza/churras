@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 export default function Header() {
   return (
@@ -14,7 +14,13 @@ export default function Header() {
         width={"100%"}
         height={"100%"}
         zIndex={-1}
-      ></Flex>
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Text fontSize={"48px"} fontWeight={"bold"}>
+          Agenda de Churras
+        </Text>
+      </Flex>
     </Flex>
   );
 }
