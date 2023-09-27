@@ -37,8 +37,8 @@ const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
       as={"form"}
       onSubmit={handleSubmit(onSubmit)}
       flexDirection={"column"}
+      width={"100%"}
       rowGap={4}
-      width={"282px"}
     >
       <InputText
         type="email"

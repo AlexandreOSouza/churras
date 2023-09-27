@@ -17,7 +17,7 @@ export default function Header() {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Text fontSize={"48px"} fontWeight={"bold"}>
+        <Text fontSize={"48px"} fontWeight={"bold"} textAlign={"center"}>
           Agenda de Churras
         </Text>
       </Flex>
