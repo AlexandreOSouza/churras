@@ -1,15 +1,16 @@
-import { Text } from "@chakra-ui/react";
+import Layout from "@/components/layout";
+import { TITLES } from "@/const/title";
 import Head from "next/head";
 
 export default function index() {
   return (
     <>
       <Head>
-        <title>Index</title>
+        <title>{TITLES.login}</title>
       </Head>
-      <Text fontSize={"25px"} color={"churras.primary_yellow"}>
-        Hello
-      </Text>
+      <Layout>
+        <h1>hello</h1>
+      </Layout>
     </>
   );
 }
