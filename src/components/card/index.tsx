@@ -40,7 +40,7 @@ export default function Card({ churras }: Props) {
         >
           <GoPeople fontSize={"20px"} />
           <Text color={"churras.black"} fontSize={"21px"}>
-            {churras.participants}
+            {churras.totalParticipants}
           </Text>
         </Flex>
         <Flex

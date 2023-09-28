@@ -6,19 +6,19 @@ const CHURRAS = [
   {
     date: "01/12",
     description: "Níver do Gui",
-    participants: 15,
+    totalParticipants: 15,
     totalAmount: 280,
   },
   {
     date: "23/12",
     description: "Natal",
-    participants: 28,
+    totalParticipants: 28,
     totalAmount: 400,
   },
   {
     date: "06/01",
     description: "Sem motivo",
-    participants: 12,
+    totalParticipants: 12,
     totalAmount: 140,
   },
 ];
