@@ -7,6 +7,7 @@ const colors = {
     black: "rgba(0, 0, 0, 1)",
     black_08: "rgba(0, 0, 0, 0.8)",
     gray: "rgba(241, 241, 241, 1)",
+    dark_gray: "rgb(120, 120, 120)",
     background: "rgba(250, 250, 250, 1)",
   },
 };
