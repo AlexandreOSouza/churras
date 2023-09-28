@@ -5,7 +5,7 @@ export default function Footer() {
     <Flex width={"100%"} justifyContent={"center"} mb={"50px"}>
       <Image
         alt={"trinca logo"}
-        src={"./assets/imgs/trinca_logo.png"}
+        src={"/assets/imgs/trinca_logo.png"}
         width={"48px"}
         height={"48px"}
       />

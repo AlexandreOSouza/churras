@@ -15,7 +15,7 @@ export default function Header() {
         background={"churras.primary_yellow"}
       >
         <Flex
-          backgroundImage={"url(./assets/imgs/bg_pattern.png)"}
+          backgroundImage={"url(/assets/imgs/bg_pattern.png)"}
           width={"100%"}
           height={"100%"}
           justifyContent={"center"}
