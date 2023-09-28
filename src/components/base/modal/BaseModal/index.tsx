@@ -23,7 +23,7 @@ export default function BaseModal({ isOpen, onClose, title, children }: Props) {
           {title}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>{children}</ModalBody>
+        {children}
       </ModalContent>
     </Modal>
   );
