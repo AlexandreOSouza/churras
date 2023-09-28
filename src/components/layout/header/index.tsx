@@ -10,16 +10,26 @@ export default function Header() {
       }
     >
       <Flex
-        backgroundImage={"url(./assets/imgs/bg_pattern.png)"}
         width={"100%"}
         height={"100%"}
-        zIndex={-1}
-        justifyContent={"center"}
-        alignItems={"center"}
+        background={"churras.primary_yellow"}
       >
-        <Text fontSize={"48px"} fontWeight={"bold"} textAlign={"center"}>
-          Agenda de Churras
-        </Text>
+        <Flex
+          backgroundImage={"url(./assets/imgs/bg_pattern.png)"}
+          width={"100%"}
+          height={"100%"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Text
+            fontSize={"48px"}
+            fontWeight={"bold"}
+            textAlign={"center"}
+            color={"churras.black"}
+          >
+            Agenda de Churras
+          </Text>
+        </Flex>
       </Flex>
     </Flex>
   );
