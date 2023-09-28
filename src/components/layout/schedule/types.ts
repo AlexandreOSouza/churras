@@ -5,6 +5,7 @@ export type Participant = {
 };
 
 export type Churras = {
+  id?: string;
   date: string;
   description: string;
   totalParticipants: number;

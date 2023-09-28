@@ -49,11 +49,12 @@ export default function InputText({
         isInvalid={invalid}
         type={type}
         background={"churras.white"}
-        borderRadius={"2px"}
-        border={"none"}
         color={"churras.black_08"}
         fontSize={"18px"}
         height={"50px"}
+        border={"1px solid"}
+        borderColor={"churras.gray"}
+        borderRadius={8}
         _placeholder={{
           color: "churras.black_08",
           fontSize: "18px",

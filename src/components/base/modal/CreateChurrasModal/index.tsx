@@ -1,4 +1,4 @@
-import { Button, Flex, ModalBody, ModalFooter } from "@chakra-ui/react";
+import { Flex, ModalBody } from "@chakra-ui/react";
 import BaseModal from "../BaseModal";
 import PrimaryButton from "../../button/PrimaryButton";
 import SecondaryButton from "../../button/SecondaryButton";
