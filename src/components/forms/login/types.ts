@@ -7,6 +7,7 @@ export type LoginFormValues = {
 
 export type LoginProps = {
   onSubmit: SubmitHandler<LoginFormValues>;
+  isLoading: boolean;
 };
 
 export type LoginFormRefType = {

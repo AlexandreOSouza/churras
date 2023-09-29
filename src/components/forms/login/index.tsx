@@ -12,7 +12,7 @@ import { LoginFormRefType, LoginFormValues, LoginProps } from "./types";
 import PrimaryButton from "@/components/base/button/PrimaryButton";
 
 const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
-  { onSubmit },
+  { onSubmit, isLoading },
   ref,
 ) => {
   const {
@@ -54,7 +54,11 @@ const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
         placeholder="Senha"
         control={control}
       />
-      <PrimaryButton isLoading={isSubmitting} type="submit" height={"50px"}>
+      <PrimaryButton
+        isLoading={isSubmitting || isLoading}
+        type="submit"
+        height={"50px"}
+      >
         Entrar
       </PrimaryButton>
     </Flex>
