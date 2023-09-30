@@ -16,8 +16,7 @@ const theme = extendTheme({
         margin: 0,
         padding: 0,
         fontFamily: "body",
-        // TODO: Change theme color
-        bg: mode("churras.primary_yellow", "churras.primary_yellow")(props),
+        bg: "churras.white",
         lineHeight: "base",
       },
     }),

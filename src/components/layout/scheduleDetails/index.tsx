@@ -1,4 +1,12 @@
-import { Flex, List, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Flex,
+  List,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Churras, Participant } from "../schedule/types";
 import { GoPeople } from "react-icons/go";
 import { HiCurrencyDollar } from "react-icons/hi";
@@ -7,14 +15,37 @@ import { IoAddOutline } from "react-icons/io5";
 import AddParticipantModal, {
   AddFormValues,
 } from "@/components/base/modal/AddParticipantModal";
+import { AiOutlineRight } from "react-icons/ai";
+import useChurras from "@/hooks/useChurras";
 
 type Props = {
   churras: Churras;
+  onUpdate: () => void;
 };
-export default function ScheduleDetail({ churras }: Props) {
-  const AddModalDisclosure = useDisclosure();
-  const handleSubmit = (values: AddFormValues) => {
-    console.log(values);
+
+export default function ScheduleDetail({ churras, onUpdate }: Props) {
+  const addModalDisclosure = useDisclosure();
+  const { addParticipant, updateParticipant } = useChurras();
+
+  const handleSubmit = async (values: AddFormValues) => {
+    if (churras.id) {
+      const newParticipant: Participant = {
+        name: values.name,
+        amount: values.amount,
+        paid: false,
+      };
+      await addParticipant(churras, newParticipant);
+      onUpdate();
+      addModalDisclosure.onClose();
+    }
+  };
+
+  const handleSelect = async (idx: number) => {
+    if (churras.participants) {
+      churras.participants[idx].paid = !churras.participants[idx].paid;
+      updateParticipant(churras, churras.participants);
+      onUpdate();
+    }
   };
 
   return (
@@ -30,6 +61,20 @@ export default function ScheduleDetail({ churras }: Props) {
         py={8}
         px={8}
       >
+        <Flex width={"100%"}>
+          <Breadcrumb
+            spacing="8px"
+            separator={<AiOutlineRight color="gray.500" />}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/schedule">Agenda</BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem isCurrentPage>
+              <BreadcrumbLink href="#">Detalhe</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </Flex>
         <Flex width={"100%"} justifyContent={"space-between"}>
           <Text fontSize={"28px"} fontWeight={"800"}>
             {churras.date}
@@ -65,7 +110,7 @@ export default function ScheduleDetail({ churras }: Props) {
             alignItems={"center"}
             columnGap={2}
             cursor={"pointer"}
-            onClick={AddModalDisclosure.onOpen}
+            onClick={addModalDisclosure.onOpen}
           >
             <Text fontSize={"18px"} fontWeight={"500"}>
               Participantes
@@ -87,13 +132,13 @@ export default function ScheduleDetail({ churras }: Props) {
         <List width={"100%"}>
           {churras.participants &&
             churras.participants.map((p: Participant, idx: number) => (
-              <ListItem key={idx} {...p} />
+              <ListItem key={idx} onSelect={() => handleSelect(idx)} {...p} />
             ))}
         </List>
       </Flex>
       <AddParticipantModal
-        isOpen={AddModalDisclosure.isOpen}
-        onClose={AddModalDisclosure.onClose}
+        isOpen={addModalDisclosure.isOpen}
+        onClose={addModalDisclosure.onClose}
         onSubmit={handleSubmit}
       />
     </>

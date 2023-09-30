@@ -18,7 +18,7 @@ export default function Layout({ children }: WithChildren) {
     >
       <Flex flexDirection={"column"} alignItems={"center"}>
         <Header />
-        <Flex maxWidth={"1920px"} mt={"-50px"}>
+        <Flex maxWidth={"1920px"} mt={"-50px"} mb={"50px"}>
           {children}
         </Flex>
       </Flex>
