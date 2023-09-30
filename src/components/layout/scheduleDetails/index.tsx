@@ -25,7 +25,7 @@ type Props = {
 
 export default function ScheduleDetail({ churras, onUpdate }: Props) {
   const addModalDisclosure = useDisclosure();
-  const { addParticipant } = useChurras();
+  const { addParticipant, updateParticipant } = useChurras();
 
   const handleSubmit = async (values: AddFormValues) => {
     if (churras.id) {
@@ -40,10 +40,11 @@ export default function ScheduleDetail({ churras, onUpdate }: Props) {
     }
   };
 
-  const handleSelect = (idx: number) => {
-    console.log(idx, churras.participants);
+  const handleSelect = async (idx: number) => {
     if (churras.participants) {
       churras.participants[idx].paid = !churras.participants[idx].paid;
+      updateParticipant(churras, churras.participants);
+      onUpdate();
     }
   };
 

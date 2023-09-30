@@ -40,9 +40,6 @@ export default function useChurras() {
     const id = churras.id!;
     const churrasRef = doc(db, COLLECTIONS.CHURRAS, id);
 
-    churras.totalAmount;
-    churras.totalParticipants;
-
     const totalAmount = participants!.reduce((accumulator, currentValue) => {
       if (currentValue.amount !== undefined) {
         return accumulator + currentValue.amount;
@@ -69,5 +66,33 @@ export default function useChurras() {
     return undefined;
   };
 
-  return { addChurras, listChurras, addParticipant, getChurrasById };
+  const updateParticipant = async (
+    churras: Churras,
+    participants: Array<Participant>,
+  ) => {
+    if (churras.id) {
+      const churrasRef = doc(db, COLLECTIONS.CHURRAS, churras.id);
+
+      const totalAmount = participants.reduce((accumulator, currentValue) => {
+        if (currentValue.amount !== undefined) {
+          return accumulator + currentValue.amount;
+        }
+        return accumulator;
+      }, 0);
+
+      await updateDoc(churrasRef, {
+        participants,
+        totalParticipants: participants?.length,
+        totalAmount,
+      });
+    }
+  };
+
+  return {
+    addChurras,
+    listChurras,
+    addParticipant,
+    getChurrasById,
+    updateParticipant,
+  };
 }
