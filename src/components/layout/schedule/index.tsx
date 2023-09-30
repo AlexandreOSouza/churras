@@ -4,18 +4,36 @@ import { Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import AddButton from "@/components/base/button/AddButton";
 import CreateChurrasModal from "@/components/base/modal/CreateChurrasModal";
 import { useRouter } from "next/router";
+import useChurras from "@/hooks/useChurras";
+import { useEffect, useState } from "react";
+import { auth } from "@/config/firebase";
 
-type Props = {
-  churras: Array<Churras>;
-};
-
-export default function Schedule({ churras }: Props) {
+export default function Schedule() {
   const router = useRouter();
   const createChurrasDisclosure = useDisclosure();
+
+  const [churras, setChurras] = useState<Array<Churras>>([]);
+  const { listChurras } = useChurras();
 
   const handleDetail = (id: string) => {
     router.push(`/detail/${id}`);
   };
+
+  const updateChurras = () => {
+    listChurras(auth.currentUser?.uid as string).then((churras) =>
+      setChurras(churras),
+    );
+  };
+
+  const handleClose = () => {
+    updateChurras();
+    createChurrasDisclosure.onClose();
+  };
+
+  useEffect(() => {
+    updateChurras();
+  }, []);
+
   return (
     <>
       <Grid templateColumns="repeat(2, 1fr)" gap={6}>
@@ -34,7 +52,7 @@ export default function Schedule({ churras }: Props) {
       </Grid>
       <CreateChurrasModal
         isOpen={createChurrasDisclosure.isOpen}
-        onClose={createChurrasDisclosure.onClose}
+        onClose={handleClose}
       />
     </>
   );
