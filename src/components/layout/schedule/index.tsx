@@ -32,7 +32,7 @@ export default function Schedule() {
 
   useEffect(() => {
     updateChurras();
-  }, []);
+  }, [auth.currentUser]);
 
   return (
     <>

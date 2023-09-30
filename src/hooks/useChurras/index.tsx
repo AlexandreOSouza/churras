@@ -14,6 +14,7 @@ export default function useChurras() {
       snap.forEach((doc) => {
         const data = doc.data() as Churras;
 
+        console.log(data, id);
         if (data.user === id) {
           const temp = {
             id: doc.id,
