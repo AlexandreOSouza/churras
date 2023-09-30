@@ -2,7 +2,12 @@ import { ListItem as DefaultListItem, Flex, Text } from "@chakra-ui/react";
 import CustomCheckbox from "../../checkbox/CustomCheckbox";
 import { Participant } from "@/components/layout/schedule/types";
 
-export default function ListItem({ name, amount, paid }: Participant) {
+export default function ListItem({
+  name,
+  amount,
+  paid,
+  onSelect,
+}: Participant & { onSelect: () => void }) {
   return (
     <DefaultListItem>
       <Flex
@@ -14,8 +19,9 @@ export default function ListItem({ name, amount, paid }: Participant) {
         fontWeight={"700"}
         fontSize={"21px"}
         cursor={"pointer"}
+        onClick={onSelect}
       >
-        <CustomCheckbox />
+        <CustomCheckbox isChecked={paid} />
         <Text ml={"8px"}>{name}</Text>
         <Text ml={"auto"}>R$ {amount}</Text>
       </Flex>

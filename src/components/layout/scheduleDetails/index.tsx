@@ -1,4 +1,12 @@
-import { Flex, List, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Flex,
+  List,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Churras, Participant } from "../schedule/types";
 import { GoPeople } from "react-icons/go";
 import { HiCurrencyDollar } from "react-icons/hi";
@@ -7,42 +15,35 @@ import { IoAddOutline } from "react-icons/io5";
 import AddParticipantModal, {
   AddFormValues,
 } from "@/components/base/modal/AddParticipantModal";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "@/config/firebase";
-import { COLLECTIONS } from "@/const/collections";
+import { AiOutlineRight } from "react-icons/ai";
+import useChurras from "@/hooks/useChurras";
 
 type Props = {
   churras: Churras;
+  onUpdate: () => void;
 };
-export default function ScheduleDetail({ churras }: Props) {
-  const AddModalDisclosure = useDisclosure();
+
+export default function ScheduleDetail({ churras, onUpdate }: Props) {
+  const addModalDisclosure = useDisclosure();
+  const { addParticipant } = useChurras();
+
   const handleSubmit = async (values: AddFormValues) => {
     if (churras.id) {
-      const participants = churras.participants;
       const newParticipant: Participant = {
         name: values.name,
         amount: values.amount,
         paid: false,
       };
-      participants?.push(newParticipant);
-      const id = churras.id!;
-      const churrasRef = doc(db, COLLECTIONS.CHURRAS, id);
+      await addParticipant(churras, newParticipant);
+      onUpdate();
+      addModalDisclosure.onClose();
+    }
+  };
 
-      churras.totalAmount;
-      churras.totalParticipants;
-
-      const totalAmount = participants!.reduce((accumulator, currentValue) => {
-        if (currentValue.amount !== undefined) {
-          return accumulator + currentValue.amount;
-        }
-        return accumulator;
-      }, 0);
-
-      await updateDoc(churrasRef, {
-        participants,
-        totalParticipants: participants?.length,
-        totalAmount,
-      });
+  const handleSelect = (idx: number) => {
+    console.log(idx, churras.participants);
+    if (churras.participants) {
+      churras.participants[idx].paid = !churras.participants[idx].paid;
     }
   };
 
@@ -59,6 +60,20 @@ export default function ScheduleDetail({ churras }: Props) {
         py={8}
         px={8}
       >
+        <Flex width={"100%"}>
+          <Breadcrumb
+            spacing="8px"
+            separator={<AiOutlineRight color="gray.500" />}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/schedule">Agenda</BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem isCurrentPage>
+              <BreadcrumbLink href="#">Detalhe</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </Flex>
         <Flex width={"100%"} justifyContent={"space-between"}>
           <Text fontSize={"28px"} fontWeight={"800"}>
             {churras.date}
@@ -94,7 +109,7 @@ export default function ScheduleDetail({ churras }: Props) {
             alignItems={"center"}
             columnGap={2}
             cursor={"pointer"}
-            onClick={AddModalDisclosure.onOpen}
+            onClick={addModalDisclosure.onOpen}
           >
             <Text fontSize={"18px"} fontWeight={"500"}>
               Participantes
@@ -116,13 +131,13 @@ export default function ScheduleDetail({ churras }: Props) {
         <List width={"100%"}>
           {churras.participants &&
             churras.participants.map((p: Participant, idx: number) => (
-              <ListItem key={idx} {...p} />
+              <ListItem key={idx} onSelect={() => handleSelect(idx)} {...p} />
             ))}
         </List>
       </Flex>
       <AddParticipantModal
-        isOpen={AddModalDisclosure.isOpen}
-        onClose={AddModalDisclosure.onClose}
+        isOpen={addModalDisclosure.isOpen}
+        onClose={addModalDisclosure.onClose}
         onSubmit={handleSubmit}
       />
     </>
