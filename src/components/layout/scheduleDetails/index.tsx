@@ -7,14 +7,43 @@ import { IoAddOutline } from "react-icons/io5";
 import AddParticipantModal, {
   AddFormValues,
 } from "@/components/base/modal/AddParticipantModal";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/config/firebase";
+import { COLLECTIONS } from "@/const/collections";
 
 type Props = {
   churras: Churras;
 };
 export default function ScheduleDetail({ churras }: Props) {
   const AddModalDisclosure = useDisclosure();
-  const handleSubmit = (values: AddFormValues) => {
-    console.log(values);
+  const handleSubmit = async (values: AddFormValues) => {
+    if (churras.id) {
+      const participants = churras.participants;
+      const newParticipant: Participant = {
+        name: values.name,
+        amount: values.amount,
+        paid: false,
+      };
+      participants?.push(newParticipant);
+      const id = churras.id!;
+      const churrasRef = doc(db, COLLECTIONS.CHURRAS, id);
+
+      churras.totalAmount;
+      churras.totalParticipants;
+
+      const totalAmount = participants!.reduce((accumulator, currentValue) => {
+        if (currentValue.amount !== undefined) {
+          return accumulator + currentValue.amount;
+        }
+        return accumulator;
+      }, 0);
+
+      await updateDoc(churrasRef, {
+        participants,
+        totalParticipants: participants?.length,
+        totalAmount,
+      });
+    }
   };
 
   return (
