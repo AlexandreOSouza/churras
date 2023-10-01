@@ -9,7 +9,7 @@ Mini-ERP, covering the management (CRUD) of events (barbecues) and their partici
 ### Usage
 ---
 
-To start the interactive program, simply go to [https://djdlfjsldjflsd](https://jjfnnelr).
+To start the interactive program, simply go to [https://churras-rho.vercel.app/](https://churras-rho.vercel.app/).
 
 `churras` was built with Next-js and Firebase in mind. Designed to be quick and easy to use, without the need to have a database installed.
 
