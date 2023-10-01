@@ -28,9 +28,11 @@ export default function ScheduleDetail({ churras, onUpdate }: Props) {
   const { addParticipant, updateParticipant } = useChurras();
 
   const handleDelete = async (idx: number) => {
-    churras.participants?.splice(idx, 1);
-    await updateParticipant(churras, churras.participants);
-    onUpdate();
+    if (churras.participants) {
+      churras.participants?.splice(idx, 1);
+      await updateParticipant(churras, churras.participants);
+      onUpdate();
+    }
   };
 
   const handleSubmit = async (values: AddFormValues) => {
