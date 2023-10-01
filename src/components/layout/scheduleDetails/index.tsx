@@ -27,6 +27,12 @@ export default function ScheduleDetail({ churras, onUpdate }: Props) {
   const addModalDisclosure = useDisclosure();
   const { addParticipant, updateParticipant } = useChurras();
 
+  const handleDelete = async (idx: number) => {
+    churras.participants?.splice(idx, 1);
+    await updateParticipant(churras, churras.participants);
+    onUpdate();
+  };
+
   const handleSubmit = async (values: AddFormValues) => {
     if (churras.id) {
       const newParticipant: Participant = {
@@ -132,7 +138,12 @@ export default function ScheduleDetail({ churras, onUpdate }: Props) {
         <List width={"100%"}>
           {churras.participants &&
             churras.participants.map((p: Participant, idx: number) => (
-              <ListItem key={idx} onSelect={() => handleSelect(idx)} {...p} />
+              <ListItem
+                key={idx}
+                onSelect={() => handleSelect(idx)}
+                onDelete={() => handleDelete(idx)}
+                {...p}
+              />
             ))}
         </List>
       </Flex>
