@@ -1,8 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+![firebase](https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black)
+![nextjs](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![chakra-ui](https://img.shields.io/badge/Chakra--UI-319795?style=for-the-badge&logo=chakra-ui&logoColor=white)
+![typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+# Churras - Barbecue Management System
+Mini-ERP, covering the management (CRUD) of events (barbecues) and their participants.
 
-First, run the development server:
+### Usage
+---
+
+To start the interactive program, simply go to [https://djdlfjsldjflsd](https://jjfnnelr).
+
+`churras` was built with Next-js and Firebase in mind. Designed to be quick and easy to use, without the need to have a database installed.
+
+<img width="1233" alt="Screenshot 2023-09-30 at 22 15 36" src="https://github.com/AlexandreOSouza/churras/assets/41930085/ad2fcc3a-885f-44ca-9038-3dd7b1676f04">
+
+### What can you do?
+---
+- Create a new user
+  - Based on email and password
+- Login with email and password
+- View all the events for the current user
+- Add a new event
+  - Date of the event
+  - Description of the event
+- View the event detail
+  - Add new participant
+  - Mark as payed
+  - Remove participant
+ 
+### Run locally 
+---
+
+To run locally, first copy the `.env.example` and add your own Firebase envs.
 
 ```bash
 npm run dev
@@ -16,21 +46,4 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    
