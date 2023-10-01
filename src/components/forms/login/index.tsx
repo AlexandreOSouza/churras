@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import InputText from "@/components/base/input/InputText";
 import schema from "./schema";
 import { useForm } from "react-hook-form";
@@ -7,14 +7,17 @@ import {
   ForwardRefRenderFunction,
   forwardRef,
   useImperativeHandle,
+  useState,
 } from "react";
 import { LoginFormRefType, LoginFormValues, LoginProps } from "./types";
 import PrimaryButton from "@/components/base/button/PrimaryButton";
+import SecondaryButton from "@/components/base/button/SecondaryButton";
 
 const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
-  { onSubmit, isLoading },
+  { onSubmit, isLoading, onCreate },
   ref,
 ) => {
+  const [isLogin, setIsLogin] = useState(true);
   const {
     handleSubmit,
     control,
@@ -35,7 +38,7 @@ const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
   return (
     <Flex
       as={"form"}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(isLogin ? onSubmit : onCreate)}
       flexDirection={"column"}
       width={"100%"}
       rowGap={4}
@@ -54,13 +57,34 @@ const Login: ForwardRefRenderFunction<LoginFormRefType, LoginProps> = (
         placeholder="Senha"
         control={control}
       />
-      <PrimaryButton
-        isLoading={isSubmitting || isLoading}
-        type="submit"
-        height={"50px"}
-      >
-        Entrar
-      </PrimaryButton>
+      {isLogin ? (
+        <PrimaryButton
+          isLoading={isSubmitting || isLoading}
+          type="submit"
+          height={"50px"}
+        >
+          Entrar
+        </PrimaryButton>
+      ) : (
+        <SecondaryButton
+          isLoading={isSubmitting || isLoading}
+          type="submit"
+          height={"50px"}
+        >
+          Cadastre-se
+        </SecondaryButton>
+      )}
+      <Flex columnGap={2}>
+        <Text color={"churras.black"}>Nao tem login?</Text>
+        <Text
+          cursor={"pointer"}
+          color={"blue"}
+          textDecoration={"underline"}
+          onClick={() => setIsLogin(false)}
+        >
+          Cadastre-se
+        </Text>
+      </Flex>
     </Flex>
   );
 };
