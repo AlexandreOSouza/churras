@@ -1,17 +1,9 @@
-import { auth } from "@/config/firebase";
 import { useAuth } from "@/hooks/useLogin";
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { signOut } from "firebase/auth";
-import { useRouter } from "next/router";
 
 export default function Header() {
-  const router = useRouter();
-  const { isLogin } = useAuth();
-  const handleLogout = async () => {
-    signOut(auth).then(() => {
-      router.push("/");
-    });
-  };
+  const { isLogin, handleLogout } = useAuth();
+
   return (
     <Flex
       width={"100%"}

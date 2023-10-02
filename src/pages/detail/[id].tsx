@@ -7,8 +7,7 @@ import useChurras from "@/hooks/useChurras";
 import { useAuth } from "@/hooks/useLogin";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Detail({
   churras,
@@ -16,14 +15,7 @@ export default function Detail({
   const [currChurras, setCurrChurras] = useState(churras);
   const { getChurrasById } = useChurras();
 
-  const router = useRouter();
   const { isLogin } = useAuth();
-
-  useEffect(() => {
-    if (!isLogin) {
-      router.push("/");
-    }
-  }, [isLogin]);
 
   const handleUpdate = async () => {
     if (churras.id) {
