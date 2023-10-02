@@ -1,6 +1,15 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { auth } from "@/config/firebase";
+import { Button, Flex, Text } from "@chakra-ui/react";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 
 export default function Header() {
+  const router = useRouter();
+  const handleLogout = async () => {
+    signOut(auth).then(() => {
+      router.push("/");
+    });
+  };
   return (
     <Flex
       width={"100%"}
@@ -13,7 +22,18 @@ export default function Header() {
         width={"100%"}
         height={"100%"}
         background={"churras.primary_yellow"}
+        flexDirection={"column"}
       >
+        <Flex
+          position={"absolute"}
+          width={"100%"}
+          justifyContent={"flex-end"}
+          p={4}
+        >
+          <Button colorScheme="red" onClick={handleLogout}>
+            logout
+          </Button>
+        </Flex>
         <Flex
           backgroundImage={"url(/assets/imgs/bg_pattern.png)"}
           width={"100%"}
