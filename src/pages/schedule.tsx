@@ -1,20 +1,24 @@
 import Layout from "@/components/layout";
 import Schedule from "@/components/layout/schedule";
-import { auth } from "@/config/firebase";
+import { useAuth } from "@/hooks/useLogin";
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function List() {
+  const { isLogin } = useAuth();
+
   const router = useRouter();
+
   useEffect(() => {
-    if (!auth.currentUser?.uid) {
+    if (!isLogin) {
       router.push("/");
     }
-  }, [router]);
+  }, [isLogin]);
+
   return (
     <Layout>
-      {auth.currentUser?.uid && (
+      {isLogin && (
         <Flex>
           <Schedule />
         </Flex>

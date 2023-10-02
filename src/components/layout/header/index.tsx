@@ -1,10 +1,12 @@
 import { auth } from "@/config/firebase";
+import { useAuth } from "@/hooks/useLogin";
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 
 export default function Header() {
   const router = useRouter();
+  const { isLogin } = useAuth();
   const handleLogout = async () => {
     signOut(auth).then(() => {
       router.push("/");
@@ -30,9 +32,11 @@ export default function Header() {
           justifyContent={"flex-end"}
           p={4}
         >
-          <Button colorScheme="red" onClick={handleLogout}>
-            logout
-          </Button>
+          {isLogin && (
+            <Button colorScheme="red" onClick={handleLogout}>
+              logout
+            </Button>
+          )}
         </Flex>
         <Flex
           backgroundImage={"url(/assets/imgs/bg_pattern.png)"}

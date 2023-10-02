@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { TITLES } from "@/const/title";
 import { Titles } from "@/types/commun";
 import Head from "next/head";
+import { AuthContextProvider } from "@/hooks/useLogin";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -17,7 +18,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>{title}</title>
       </Head>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+        <AuthContextProvider>
+          <Component {...pageProps} />
+        </AuthContextProvider>
       </ChakraProvider>
     </>
   );
