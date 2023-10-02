@@ -4,6 +4,7 @@ import ScheduleDetail from "@/components/layout/scheduleDetails";
 import { db } from "@/config/firebase";
 import { COLLECTIONS } from "@/const/collections";
 import useChurras from "@/hooks/useChurras";
+import { useAuth } from "@/hooks/useLogin";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useState } from "react";
@@ -13,6 +14,8 @@ export default function Detail({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [currChurras, setCurrChurras] = useState(churras);
   const { getChurrasById } = useChurras();
+
+  const { isLogin } = useAuth();
 
   const handleUpdate = async () => {
     if (churras.id) {
@@ -25,7 +28,9 @@ export default function Detail({
 
   return (
     <Layout>
-      <ScheduleDetail churras={currChurras} onUpdate={handleUpdate} />
+      {isLogin && (
+        <ScheduleDetail churras={currChurras} onUpdate={handleUpdate} />
+      )}
     </Layout>
   );
 }
